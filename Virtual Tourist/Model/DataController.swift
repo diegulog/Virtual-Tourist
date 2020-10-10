@@ -14,10 +14,11 @@ class DataController {
         return persistentContainer.viewContext
     }
     
-    var backgroudContext:NSManagedObjectContext!
+    let backgroudContext:NSManagedObjectContext!
     
     init(modelName:String) {
         persistentContainer = NSPersistentContainer(name: modelName)
+        backgroudContext = persistentContainer.newBackgroundContext()
 
     }
     
@@ -28,8 +29,6 @@ class DataController {
     }
     
     func configureContext() {
-        backgroudContext = persistentContainer.newBackgroundContext()
-        
         viewContext.automaticallyMergesChangesFromParent = true
         backgroudContext.automaticallyMergesChangesFromParent = true
         

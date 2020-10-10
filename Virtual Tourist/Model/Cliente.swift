@@ -25,6 +25,12 @@ class Cliente {
         }
     }
     
+    class func getRandomPageNum(photosAvailable: Int, maxPhotosDisplayed: Int = 18) -> Int {
+      let flickrLimit = 4000
+      let pages = min(photosAvailable , flickrLimit) / maxPhotosDisplayed
+      return Int.random(in: 0...pages)
+    }
+    
     class func search(page:Int = 1, perPage:Int = 18, lat: Double,lon: Double, completion: @escaping (PhotosResponse?, Error?) -> Void) {
         URLSession.shared.dataTask(with: Endpoints.search(page,perPage, lat, lon).url) { data, response, error in
             guard let data = data else {
